@@ -1,12 +1,7 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+//shortcut function for localStorage.get()
+function ls(value) {
+    return localStorage.getItem(value);
+}
 function updateClockTime(separator) {
     const timeRN = new Date();
     //padStart() adds 0 when there is only a single digit
@@ -57,23 +52,9 @@ function yearCountdown() {
     document.getElementById('currentYear').innerText = String(new Date().getFullYear());
 }
 ;
-function bookmarks(bookmarkList) {
-    console.log(bookmarkList);
-}
-;
-function getConfig() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const fetchedData = yield fetch('../config.json');
-        const config = yield fetchedData.json();
-        //run all widgets' functions
-        setInterval(updateClockTime, 1000, config.timeSeparator);
-        setInterval(ageCounter, 1000, config.birthYear, config.birthMonth, config.birthDay);
-        clockDate(config.dateSeparator);
-        ageCounter(config.birthYear, config.birthMonth, config.birthDay);
-        yearCountdown();
-        bookmarks(config.bookmarks);
-    });
-}
-getConfig();
+setInterval(updateClockTime, 1000, ls("timeSeparator"));
+setInterval(ageCounter, 1000, Number(ls("birthYear")), Number(ls("birthMonth")), Number(ls("birthDay")));
+clockDate(ls("dateSeparator"));
+yearCountdown();
 export {};
 //# sourceMappingURL=main.js.map

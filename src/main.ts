@@ -1,3 +1,9 @@
+//shortcut function for localStorage.get()
+function ls(value: string): string{
+	return localStorage.getItem(value);
+}
+
+
 function updateClockTime(separator: string): void{
 	const timeRN: Date = new Date();
 	//padStart() adds 0 when there is only a single digit
@@ -52,24 +58,9 @@ function yearCountdown(): void{
 	document.getElementById('currentYear').innerText = String(new Date().getFullYear());
 };
 
-function bookmarks(bookmarkList): void{
-	console.log(bookmarkList);
-};
+setInterval(updateClockTime, 1000, ls("timeSeparator"));
+setInterval(ageCounter, 1000, Number(ls("birthYear")), Number(ls("birthMonth")), Number(ls("birthDay")));
+clockDate(ls("dateSeparator"));
+yearCountdown();
 
-
-
-async function getConfig() {
-	const fetchedData = await fetch('../config.json');
-	const config = await fetchedData.json();
-	
-	//run all widgets' functions
-	setInterval(updateClockTime, 1000, config.timeSeparator);
-	setInterval(ageCounter, 1000, config.birthYear, config.birthMonth, config.birthDay);
-	clockDate(config.dateSeparator);
-	ageCounter(config.birthYear, config.birthMonth, config.birthDay);
-	yearCountdown();
-	bookmarks(config.bookmarks);
-}
-
-getConfig();
 
