@@ -1,0 +1,16 @@
+{
+	"timeSeparator" : ":",
+	"dateSeparator" : " / ",
+	"birthYear" : 2008,
+	"birthMonth" : 5,
+	"birthDay" : 5,
+
+	"bookmarks": [
+		{"name": "Main", "content":[
+			{"name": "Youtube", "link": "https://youtube.com"},
+			{"name": "Spotify", "link": "https://spotify.com"},
+			{"name": "Reddit", "link": "https://reddit.com"}
+		]}
+	
+	]
+}
